@@ -6,10 +6,10 @@ mod tests {
   fn searchtest() {
     let query = "duct";
     let contents = "\
-    Rust:
-    safe, fast, productive.
-    Pick three.";
-    assert_eq!(vec!["safe,fast, productive"], search(query, contents));
+Rust:
+safe, fast, productive.
+Pick three.";
+    assert_eq!(vec!["safe, fast, productive."], search(query, contents));
   }
 }
 
@@ -31,7 +31,15 @@ impl Config {
   }
 }
 
+// 'a is a lifetime linking
+// contents to the return value
 pub fn search<'a>(query: &str, contents: &'a str) -> Vec<&'a str> {
-  
-  vec![]
+  let mut hits: Vec<&str> = vec![];
+  let lines = contents.lines();
+  for line in lines {
+    if line.contains(query) {
+      hits.push(line);
+    }
+  }
+  hits
 }
