@@ -1,6 +1,7 @@
 use std::env;
 use my_grep::{self, Config};
 use std::process;
+use std::fs;
 
 fn main() {
 
@@ -11,9 +12,10 @@ fn main() {
     process::exit(1);
   });
   
-  println!("{} {}", config.query, config.filename);
-  // let contents = fs::read_to_string(filename)
-  // .expect("file not found or something");
+  let contents = fs::read_to_string(config.filename).expect("work plz");
+  for line in my_grep::search(&config.query, &contents) {
+    println!("{}", line);
+  }
 
 }
 
