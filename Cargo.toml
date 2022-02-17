@@ -1,5 +1,5 @@
 [package]
-name = "myGrep"
+name = "my_grep"
 version = "0.1.0"
 authors = ["runner"]
 edition = "2021"
